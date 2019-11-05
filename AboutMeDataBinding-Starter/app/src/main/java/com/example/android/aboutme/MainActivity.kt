@@ -40,6 +40,7 @@ class MainActivity : AppCompatActivity() {
     // create a variable for the binding object.
     private lateinit var binding: ActivityMainBinding
 
+    private val myName = MyName("Aleks Haecky")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // This line has been removed when using data binding
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity() {
 //      findViewById<Button>(R.id.done_button).setOnClickListener {
 //         addNickname(it)
 //      }
+        binding.myName = myName
         binding.doneButton.setOnClickListener { addNickname(it) }
     }
 
@@ -75,7 +77,11 @@ class MainActivity : AppCompatActivity() {
 
 //        2nd way
         binding.apply {
-            nicknameText.text = nicknameEdit.text.toString()
+            //nicknameText.text = nicknameEdit.text.toString()
+            myName?.nickname = nicknameEdit.text.toString()
+
+            // This function is used to refresh the UI with the value in the updated binding object
+            invalidateAll()
             nicknameEdit.visibility = View.GONE
             view.visibility = View.GONE
             nicknameText.visibility = View.VISIBLE
