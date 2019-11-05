@@ -17,9 +17,14 @@
 package com.example.android.navigation
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.example.android.navigation.databinding.ActivityMainBinding
+import com.example.android.navigation.databinding.FragmentTitleBinding
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,4 +42,13 @@ class MainActivity : AppCompatActivity() {
     // TODO (03) Use DataBindingUtil.inflate to inflate and return the titleFragment in onCreateView
     // In our new TitleFragment
     // R.layout.fragment_title
+}
+
+
+class TitleFragment() : Fragment() {
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val binding = DataBindingUtil.inflate<FragmentTitleBinding>(inflater, R.layout.fragment_title, container, false)
+        return binding.root
+    }
 }
