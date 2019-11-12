@@ -37,7 +37,7 @@ class SleepTrackerViewModel(
     private var tonight = MutableLiveData<SleepNight?>()
 
     init {
-        initializeTonight(
+        initializeTonight()
     }
 
     private fun initializeTonight() {
