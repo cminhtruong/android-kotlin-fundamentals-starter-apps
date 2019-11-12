@@ -34,10 +34,10 @@ class SleepTrackerViewModel(
 
     private var viewModelJob = Job()
     private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
-    private var tonight: MutableLiveData<SleepNight?>()
+    private var tonight = MutableLiveData<SleepNight?>()
 
     init {
-        initializeTonight()
+        initializeTonight(
     }
 
     private fun initializeTonight() {
