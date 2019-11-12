@@ -55,29 +55,34 @@ class GameFragment : Fragment() {
         Log.i("GameFragment", "Called ViewModelProviders.of")
         viewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
 
-        binding.correctButton.setOnClickListener { onCorrect() }
-        binding.skipButton.setOnClickListener { onSkip() }
-        binding.endGameButton.setOnClickListener { onEndGame() }
+        binding.gameViewModel = viewModel
+        // Specify the current activity as the lifecycle owner of the binding.
+        // This is used so that the binding can observe LiveData updates
+        binding.lifecycleOwner = this
+        // remove when using data binding
+//        binding.correctButton.setOnClickListener { onCorrect() }
+//        binding.skipButton.setOnClickListener { onSkip() }
+//        binding.endGameButton.setOnClickListener { onEndGame() }
 
         viewModel.score.observe(this, Observer { newScore -> binding.scoreText.text = newScore.toString() })
-        viewModel.word.observe(this, Observer { newWord -> binding.wordText.text = newWord })
+//        viewModel.word.observe(this, Observer { newWord -> binding.wordText.text = newWord })
         viewModel.evenGameFinish.observe(this, Observer<Boolean> { hasFinished -> if (hasFinished) gameFinished() })
         return binding.root
     }
 
-    /** Methods for button click handlers **/
-
-    private fun onSkip() {
-        viewModel.onSkip()
-    }
-
-    private fun onCorrect() {
-        viewModel.onCorrect()
-    }
-
-    private fun onEndGame() {
-        gameFinished()
-    }
+//    /** Methods for button click handlers **/ Remove for using data binding
+//
+//    private fun onSkip() {
+//        viewModel.onSkip()
+//    }
+//
+//    private fun onCorrect() {
+//        viewModel.onCorrect()
+//    }
+//
+//    private fun onEndGame() {
+//        gameFinished()
+//    }
 
     private fun gameFinished() {
         Toast.makeText(activity, "Game has just finished", Toast.LENGTH_SHORT).show()
